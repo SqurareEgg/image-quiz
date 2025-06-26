@@ -150,8 +150,9 @@
     function submitAnswer(choice) {
       const qIdx = quizOrder[currentIndex];
       const correct = questions[qIdx].answer;
+      const fileName = questions[qIdx].file.replace('.png', '');
 
-      userAnswers.push({ question: qIdx + 1, selected: choice, correct });
+      userAnswers.push({ fileName: fileName, selected: choice, correct });
 
       const feedback = document.getElementById('feedback');
       if (choice === correct) {
@@ -183,7 +184,7 @@
       html += `<ul>`;
       userAnswers.forEach((ans, i) => {
         const isCorrect = ans.selected === ans.correct;
-        html += `<li>문제 ${i + 1}: ${isCorrect ? '✅ 정답' : `❌ 오답 (선택: ${ans.selected}, 정답: ${ans.correct})`}</li>`;
+        html += `<li>${ans.fileName}: ${isCorrect ? '✅ 정답' : `❌ 오답 (선택: ${ans.selected}, 정답: ${ans.correct})`}</li>`;
       });
       html += `</ul>`;
       html += `<button onclick="location.reload()">다시하기</button>`;
